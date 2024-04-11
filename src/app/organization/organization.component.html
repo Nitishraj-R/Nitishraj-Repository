@@ -1,0 +1,77 @@
+<!-- <p>organization works!</p> -->
+
+<div class="mainDiv">
+    <img src="assets/logo-ladera-1024x261.png" width="300px" alt="Example Image">
+   
+    <h1 class="organizationHeader">Organization Page</h1>
+    <div class="orgImage" >
+        <svg class="svgclass" width="500" height="500">
+            <image class="image" xlink:href="assets/ladera-2.png" width="500" height="500" />
+          </svg>
+    <form [formGroup]="organizationform" class="form form-row" (ngSubmit)="submit()">
+    <table class="formTable">
+        <!-- <tr>
+            <td colspan="2"><h1 class="organizationHeader">organization</h1></td>
+        </tr> -->
+        <!-- <br> -->
+        <!-- <hr> -->
+        <!-- <br> -->
+        <tr>
+            <td>
+                <label for="organizationCode">Enter the Organization Code</label>
+            </td>
+            <td>
+                <input required #organizationCodeInput formControlName="organizationCode" id="organizationCode" name="organizationCode" type="organizationCode" placeholder="Organization code">
+            </td>
+            
+        </tr>
+        <br>
+        <tr>
+            <td>
+                <label for="name">Enter the Name</label>
+            </td>
+            <td>
+                <input required #nameInput formControlName="name" id="name" name="name" type="text" placeholder="Organization Name">
+            </td>
+            
+        </tr>
+        <br>
+        <tr>
+            <td>
+                <label for="mail">Enter the Email Id</label>
+            </td>
+            <td>
+                <input #mailInput type="text" id="mail" formControlName="emailId" name="mail" placeholder="Email Id">
+            </td>
+        </tr>
+        <br>
+        <tr>
+            <td>
+                <label for="location">Enter the location</label>
+            </td>
+            <td>
+                <input required #locationInput id="location" formControlName="location" name="location" placeholder="Location" type="text">
+            </td>
+            
+        </tr>
+        <br>
+        <tr>
+            <td>
+                <label for="contactNumber">Enter the contactNumber</label>
+            </td>
+            <td>
+                <input required #contactNumberInput id="contactNumber" placeholder="Contact Number" formControlName="contactNumber" name="contactNumber" type="text">
+            </td>
+            
+        </tr>
+        <br>
+        <tr>
+            <td>
+                <button type="submit">Save</button>
+            </td>
+        </tr>
+        <br>
+    </table>
+</form>
+</div>
+</div>

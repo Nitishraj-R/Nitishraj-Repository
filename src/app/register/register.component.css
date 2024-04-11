@@ -1,0 +1,105 @@
+@media screen and (max-width: 600px) {
+    /* CSS rules for small screens */
+    .form {
+        padding: 10px;
+        
+        /* display: flex;
+        justify-content: end; */
+        
+      }
+      .registerHeader{
+        text-align: center;
+      }
+      .formTable{
+        margin: 10px;
+      }
+      svg{
+        display: none;
+      }
+      /* .vertical-line {
+  border-left: 1px solid black; Change color and thickness as needed */
+  /* height: 100px; Change height as needed */
+/* } */
+  }
+  
+  /* Styles for screens between 600px and 900px */
+  @media screen and (min-width: 600px) and (max-width: 800px) {
+    /* CSS rules for medium screens */
+    .registerHeader{
+        text-align: center;
+      }
+    .form{
+      display: flex;
+        align-items: center;
+        justify-content: end;
+        
+    }
+    
+    .formTable{
+        margin-left: 20px;
+        /* text-align: center; */
+        align-content: end;
+
+      }
+      svg{
+        display: none;
+      }
+    hr {
+        width: 600px;
+    }
+  }
+  
+  /* Styles for screens larger than 900px */
+  @media screen and (min-width: 800px) {
+    /* CSS rules for large screens */
+    .registerHeader{
+        text-align: center;
+      }
+      .form{
+        display: flex;
+        align-items: center;
+        justify-content: end;
+        
+    }
+    
+    .formTable{
+        margin-top: 50px;
+        padding: 10px;
+        /* text-align: center; */
+
+      }
+    hr {
+        width: 600px;
+    }
+  }
+  input{
+    width:100%;
+    padding:10px;
+    margin:0px;
+    border-radius:7px;
+    border:1px solid #ccc;
+    font-family:inherit;
+  }
+  select{
+    border-radius: 10px;
+    scrollbar-color: grey;
+    
+  }
+  .mainDiv{
+    background-color: #d9e1e6;
+  }
+
+  .registerButton{
+    background-color: #00e6e6;
+  border-color: #00ffff;
+  color: #fff;
+  border-top: #333;
+  /* border-bottom: #333; */
+  border-width: 8px;
+  border-radius: 10px;
+    text-align: center;
+    /* padding: 5px;
+    margin-left: 150px; */
+    box-shadow: 5px 3px 5px;
+  }
+  
