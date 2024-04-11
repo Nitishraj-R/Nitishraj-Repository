@@ -1,0 +1,13 @@
+.formdiv{
+    display: flex;
+    /* flex-direction: column; */
+    /* width: 500px; */
+    /* flex-wrap: wrap; */
+    justify-content: space-evenly;
+    
+}
+
+.k-input-md .k-input-inner, .k-picker-md .k-input-inner {
+    padding-block: 4px;
+    padding-inline: 100px;
+}

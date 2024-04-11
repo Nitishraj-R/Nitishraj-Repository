@@ -1,0 +1,141 @@
+<!-- <p>register works!</p> -->
+<div class="mainDiv">
+    <img src="assets/logo-ladera-1024x261.png" width="300px" alt="Example Image">
+   
+    <h1 class="registerHeader">Register Page</h1>
+    <div style="display: flex;">
+        <svg width="500" height="500">
+            <image xlink:href="assets/ladera-business-image.jpg" width="500" height="500" />
+          </svg>
+    <form [formGroup]="registerform" class="form form-row" (ngSubmit)="submit()">
+        
+    <table class="formTable">
+       
+        
+        <tr>
+            <td>
+                <label for="empId">Enter the Employee Id</label>
+            </td>
+            <td>
+                <input required #emplIdInput formControlName="employeeId" id="empId" name="empId" type="text" placeholder="Employee Id">
+            </td>
+            
+        </tr>
+        <br>
+        <tr>
+            <td>
+                <label for="firstName">Enter the First Name</label>
+            </td>
+            <td>
+                <input required #firstnameInput formControlName="firstName" id="firstName" name="firstName" type="text" placeholder=" First Name">
+            </td>
+            
+        </tr>
+        <br>
+        <tr>
+            <td>
+                <label for="lastName">Enter the Last Name</label>
+            </td>
+            <td>
+                <input required #lastnameInput id="lastName" formControlName="lastName" name="lastName" placeholder="Last Name" type="text">
+            </td>
+            
+        </tr>
+        <br>
+        <tr>
+            <td>
+                <label for="mail">Enter the Email Id</label>
+            </td>
+            <td>
+                <input #mailInput type="text" id="mail" required formControlName="emailId" placeholder="Email Id" name="mail">
+            </td>
+        </tr>
+        <br>
+        <tr>
+            <td>
+                <label for="pass">Enter the Password</label>
+            </td>
+            <td>
+                <input required #passwordInput type="text" id="pass" placeholder="password" formControlName="password" name="pass">
+            </td>
+        </tr>
+        <br>
+        <tr>
+            <td>
+                <label for="joining">Enter the date of joining</label>
+            </td>
+            <td>
+                <input #joiningInput type="date" id="joining" formControlName="dateOfJoining" name="joining">
+            </td>
+        </tr>
+    </table>
+    <!-- <div class="vertical-line"></div> -->
+    <!-- <hr> -->
+    <table class="formTable">
+        <br>
+        <tr>
+            <td>
+                <label for="birth">Enter the date of birth</label>
+            </td>
+            <td>
+                <input #birthInput type="date" id="birth" formControlName="dateOfBirth" name="birth">
+            </td>
+        </tr>
+        <br>
+        <tr>
+            <td>
+                <label for="mob">Enter the mobile</label>
+            </td>
+            <td>
+                <input #mobileInput type="tel" id="mob" placeholder="Mobile Number" formControlName="mobileNumber" name="mob">
+            </td>
+        </tr>
+        <br>
+        <tr>
+            <td>
+                <label for="designation">Enter the designation</label>
+            </td>
+            <td>
+                <input #designationInput type="text" id="designation" placeholder="designation" formControlName="designation" name="designation">
+            </td>
+        </tr>
+        <br>
+        <tr>
+            <td>
+                <label for="pass">Select the Roles</label>
+            </td>
+            <td>
+                <select #rolesInput multiple name="roles" formControlName="role" id="roles">
+                    <option value="ADMIN">admin</option>
+                    <option value="USER">User</option>
+                </select>
+            </td>
+        </tr>
+        <br>
+        <!-- <tr>
+            <td>
+                <label for="pass">Select the organization</label>
+            </td>
+            <td>
+                <select #organizationInput  name="organization" formControlName="organization" id="organization">
+                    <div *ngFor="let organization of organizations;let i=index;">
+                        <option value="{{organization}}">{{organization}}+{{i}}</option>
+                    </div>
+                    <option value="other">other</option>
+                    
+                </select>
+            </td>
+        </tr> -->
+        <br>
+        <tr>
+            <td>
+                <!-- <button #registerButton class="registerButton" type="button">Register</button> -->
+            </td>
+            <td>
+                <button #registerButton class="registerButton" type="submit">Register</button>
+            </td>
+        </tr>
+    </table>
+</form>
+    </div>
+    </div>
