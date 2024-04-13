@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class AuthRequest {
 
-	private String userName;
+	private String emailId;
 	private String password;
 	private Organization organization;
 	
@@ -13,20 +13,20 @@ public class AuthRequest {
 	public AuthRequest() {
 		super();
 	}
-	public AuthRequest(String userName, String password, Organization organization) {
+	public AuthRequest(String emailId, String password, Organization organization) {
 		super();
-		this.userName = userName;
+		this.emailId = emailId;
 		this.password = password;
 		this.organization = organization;
 	}
 
 	
 	
-	public String getUserName() {
-		return userName;
+	public String getEmailId() {
+		return emailId;
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setEmailId(String emailId) {
+		this.emailId = emailId;
 	}
 	public String getPassword() {
 		return password;
@@ -48,7 +48,7 @@ public class AuthRequest {
 
 	@Override
 	public String toString() {
-		return "AuthRequest [userName=" + userName + ", password=" + password + ", organization=" + organization
+		return "AuthRequest [emailId=" + emailId + ", password=" + password + ", organization=" + organization
 				+ "]";
 	}
 

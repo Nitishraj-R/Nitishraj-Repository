@@ -155,11 +155,11 @@ public class EmployeeServiceImp implements EmployeeService, UserDetailsService {
 	}
 
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		String firstName = username.split(" ")[0];
-		String lastName = username.split(" ")[1];
-		System.out.println("firstName=" + firstName + ", lastName=" + lastName);
-		Optional<Employee> userInfo = employeeRepository.findByFirstNameAndLastNameAndActive(firstName, lastName,active);
+	public UserDetails loadUserByUsername(String emailId) throws UsernameNotFoundException {
+//		String firstName = username.split(" ")[0];
+//		String lastName = username.split(" ")[1];
+//		System.out.println("firstName=" + firstName + ", lastName=" + lastName);
+		Optional<Employee> userInfo = employeeRepository.findByEmailIdAndActive(emailId,active);
 		System.out.println("Employee->" + userInfo.get());
 		if (userInfo.isPresent()) {
 			authRequest.setOrganization(userInfo.get().getOrganization());
@@ -168,7 +168,7 @@ public class EmployeeServiceImp implements EmployeeService, UserDetailsService {
 			
 		}
 		return userInfo.map(UserInfoUserDetails::new)
-				.orElseThrow(() -> new UsernameNotFoundException("user not found " + username));
+				.orElseThrow(() -> new UsernameNotFoundException("user not found " + emailId));
 	}
 
 }

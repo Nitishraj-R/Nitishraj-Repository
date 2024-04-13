@@ -19,7 +19,7 @@ public class UserInfoUserDetails implements UserDetails{
 	 * 
 	 */
 	private static final long serialVersionUID = -3901133846513917053L;
-	private String name;
+//	private String name;
 	private String emailId;
 	private String password;
 	private List<GrantedAuthority> authorities;
@@ -27,7 +27,7 @@ public class UserInfoUserDetails implements UserDetails{
 	
 
 	public UserInfoUserDetails(Employee employee) {
-		name=employee.getFirstName()+" "+employee.getLastName();
+//		name=employee.getFirstName()+" "+employee.getLastName();
 		emailId=employee.getEmailId();
 		password=employee.getPassword();
 		authorities=employee.getRole().stream()
@@ -50,7 +50,7 @@ public class UserInfoUserDetails implements UserDetails{
 	@Override
 	public String getUsername() {
 		// TODO Auto-generated method stub
-		return name;
+		return emailId;
 	}
 
 	@Override

@@ -26,7 +26,7 @@ import com.freelancer.assetmanagement.util.ResponseStructure;
 
 @RestController
 @RequestMapping("/ITAsset")
-@CrossOrigin(origins ="*",methods = {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.DELETE},allowedHeaders = "Content-type")
+@CrossOrigin(origins ="http://localhost:4200/",methods = {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.DELETE},allowedHeaders = {"Content-type","Authentication"},allowCredentials = "true")
 
 //@Tag(
 //        name = "",

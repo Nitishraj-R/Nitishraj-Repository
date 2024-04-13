@@ -35,7 +35,7 @@ import com.freelancer.assetmanagement.util.ResponseStructure;
 
 @RestController
 @RequestMapping("/employee")
-@CrossOrigin(origins ="*",methods = {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.DELETE},allowedHeaders = "Content-type")
+@CrossOrigin(originPatterns ="*",methods = {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.DELETE},allowedHeaders = {"Content-type","Authorization"})
 
 //@Tag(
 //        name = "",
@@ -191,13 +191,13 @@ public class EmployeeController {
 	
 	@PostMapping("/authenticate")
 	public ResponseEntity<ResponseStructure<GeneratedToken>> authenticateAndGetToken(@RequestBody AuthRequest authRequest) {
-		log.info("authenticate username ->"+authRequest.getUserName()+" password->"+authRequest.getPassword());
-		Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUserName(), authRequest.getPassword()));
+		log.info("authenticate email Id ->"+authRequest.getEmailId()+" password->"+authRequest.getPassword());
+		Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getEmailId(), authRequest.getPassword()));
 		log.info("authenticate ->"+authenticate);
 		ResponseStructure<GeneratedToken> response=new ResponseStructure<>();
 		if(authenticate.isAuthenticated()) {
 			
-			generatedToken.setToken(jwtService.generateToken(authRequest.getUserName()));
+			generatedToken.setToken(jwtService.generateToken(authRequest.getEmailId()));
 //			generatedToken.setOrganizationId(authRequest.getOrganizationId()); //org is setted in employeeServiceImp class
 			log.info("orgnaization id in generated token->"+generatedToken.getOrganization());
 				response.setStatus(HttpStatus.OK.value());

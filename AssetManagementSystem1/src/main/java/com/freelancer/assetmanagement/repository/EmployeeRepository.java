@@ -17,5 +17,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer>{
 	
 	public Optional<Integer> deleteByEmployeeIdAndActive(String employeeId,Boolean active);
 
-	public List<Employee> findByActive(boolean active);
+	public List<Employee> findByActive(Boolean active);
+
+	public Optional<Employee> findByEmailIdAndActive(String emailId, Boolean active);
 }

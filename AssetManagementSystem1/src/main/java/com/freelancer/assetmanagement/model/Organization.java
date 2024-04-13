@@ -39,7 +39,7 @@ public class Organization extends BaseModel{
 	private List<Asset> asset;
 	
 	@OneToMany(mappedBy = "organization")
-//	@JsonIgnore
+	@JsonIgnore
 //	@JsonBackReference
 	private List<Employee> employees;
 
