@@ -22,6 +22,10 @@ public interface EmployeeService {
 	
 	public Integer deleteByEmployeeId(String employeeId);
 	
+<<<<<<< HEAD
 	public EmployeeDto findEmployeeByEmailId(String emailId);
+=======
+	public EmployeeDto findEmployeeByEmailId(String emailId) ;
+>>>>>>> f6f467bffe96089cff76a6636b098297faa97f90
 
 }

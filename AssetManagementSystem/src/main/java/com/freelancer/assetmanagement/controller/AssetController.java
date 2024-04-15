@@ -21,33 +21,48 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.freelancer.assetmanagement.dto.AssetCount;
 import com.freelancer.assetmanagement.dto.AssetDto;
+<<<<<<< HEAD
 import com.freelancer.assetmanagement.dto.AssetWithFixedAssetDto;
 import com.freelancer.assetmanagement.service.AssetService;
 import com.freelancer.assetmanagement.service.FixedAssetService;
 import com.freelancer.assetmanagement.service.ITAssetService;
+=======
+import com.freelancer.assetmanagement.service.AssetService;
+>>>>>>> f6f467bffe96089cff76a6636b098297faa97f90
 import com.freelancer.assetmanagement.util.ResponseStructure;
 
 
 @RestController
 @RequestMapping("/asset")
+<<<<<<< HEAD
 @CrossOrigin(origins ="http://localhost:4200/",methods = {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.DELETE},allowedHeaders = {"Content-type","Authorization"},allowCredentials = "true")
+=======
+@CrossOrigin(origins ="http://localhost:4200/",methods = {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.DELETE},allowedHeaders = {"Content-type","Authentication"},allowCredentials = "true")
+>>>>>>> f6f467bffe96089cff76a6636b098297faa97f90
 
 //@Tag(
 //        name = "",
 //        description = ""
 //)
+<<<<<<< HEAD
+=======
+
+>>>>>>> f6f467bffe96089cff76a6636b098297faa97f90
 public class AssetController {
 	
 	Logger log=LoggerFactory.getLogger(AssetController.class);
 	@Autowired
 	private AssetService assetService;
 	
+<<<<<<< HEAD
 	@Autowired
 	private FixedAssetService fixedAssetService;
 	
 	@Autowired
 	private ITAssetService iTAssetService;
 	
+=======
+>>>>>>> f6f467bffe96089cff76a6636b098297faa97f90
 	@PostMapping("/saveAsset")
 	public ResponseEntity<ResponseStructure<AssetDto>> saveAsset(@RequestBody AssetDto assetDto) {
 		log.info("AssetDto->"+assetDto);
@@ -73,6 +88,7 @@ public class AssetController {
 		}
 	}
 	
+<<<<<<< HEAD
 	@PostMapping("/saveAssetWithFixed")
 	public ResponseEntity<ResponseStructure<AssetWithFixedAssetDto>> saveAssetAndFixedAsset(@RequestBody AssetWithFixedAssetDto assetWithFixedAssetDto) {
 		log.info("AssetWithFixedAssetDto->"+assetWithFixedAssetDto);
@@ -98,6 +114,8 @@ public class AssetController {
 		}
 	}
 	
+=======
+>>>>>>> f6f467bffe96089cff76a6636b098297faa97f90
 	@PutMapping("/updateAsset")
 	public ResponseEntity<ResponseStructure<AssetDto>> updateAsset(@RequestBody AssetDto assetDto) {
 		log.info("AssetDto->"+assetDto);
@@ -148,7 +166,11 @@ public class AssetController {
 	}
 	
 	@GetMapping("/getAssetById")
+<<<<<<< HEAD
 	public ResponseEntity<ResponseStructure<AssetDto>> getAssetById(@RequestParam Long assetId) {
+=======
+	public ResponseEntity<ResponseStructure<AssetDto>> getAssetById(@RequestParam long assetId) {
+>>>>>>> f6f467bffe96089cff76a6636b098297faa97f90
 		ResponseStructure<AssetDto> response = new ResponseStructure<>();
 		AssetDto fetchedAsset = assetService.findAssetByAssetId(assetId);
 
@@ -215,6 +237,7 @@ public class AssetController {
 	
 	@GetMapping("/getCount")
 	public AssetCount getCount() {
+<<<<<<< HEAD
 		log.info("Inside getCount method in AssetController Class");
 		List<AssetDto> fetchedAssets = assetService.fetchAllAssets();
 		log.info("fetchedAssets->"+fetchedAssets);
@@ -255,5 +278,15 @@ public class AssetController {
 			return responseEntity;
 		}
 	}
+=======
+		List<AssetDto> fetchedAssets = assetService.fetchAllAssets();
+		List<AssetDto> fetchTotalAssets=assetService.fetchTotalAssets();
+		AssetCount count=new AssetCount();
+		count.setActiveCount(fetchedAssets.size());
+		count.setTotalCount(fetchTotalAssets.size());
+		count.setInactiveCount(fetchTotalAssets.size()-fetchedAssets.size());
+		return count;
+	}
+>>>>>>> f6f467bffe96089cff76a6636b098297faa97f90
 
 }

@@ -2,7 +2,10 @@ package com.freelancer.assetmanagement.service;
 
 import java.util.ArrayList;
 import java.util.List;
+<<<<<<< HEAD
 import java.util.Objects;
+=======
+>>>>>>> f6f467bffe96089cff76a6636b098297faa97f90
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +24,7 @@ import com.freelancer.assetmanagement.repository.ITAssetRepository;
 
 @Service
 @Transactional
+<<<<<<< HEAD
 public class ITAssetServiceImp implements ITAssetService {
 
 	private static final boolean active = true;
@@ -32,13 +36,30 @@ public class ITAssetServiceImp implements ITAssetService {
 	@Autowired
 	private AssetRepository assetRepository;
 
+=======
+public class ITAssetServiceImp implements ITAssetService{
+
+	private static final boolean active=true;
+
+	Logger log=LoggerFactory.getLogger(ITAssetServiceImp.class);
+	@Autowired
+	private ITAssetRepository iTAssetRepository;
+	
+	@Autowired
+	private AssetRepository assetRepository;
+	
+>>>>>>> f6f467bffe96089cff76a6636b098297faa97f90
 	@Override
 	public ITAssetDto saveITAsset(ITAssetDto iTAssetDto) {
 		ITAsset iTAsset = new ITAsset();
 		iTAssetDto.setActive(active);
 		BeanUtils.copyProperties(iTAssetDto, iTAsset);
 		ITAsset save = iTAssetRepository.save(iTAsset);
+<<<<<<< HEAD
 
+=======
+		
+>>>>>>> f6f467bffe96089cff76a6636b098297faa97f90
 		iTAssetDto.setId(save.getId());
 		iTAssetDto.setCreatedAt(save.getCreatedAt());
 		iTAssetDto.setCreatedBy(save.getCreatedBy());
@@ -108,7 +129,11 @@ public class ITAssetServiceImp implements ITAssetService {
 	public String deleteITAssetByAssetId(long assetId) {
 		Asset findByAssetIdAndActive = assetRepository.findByAssetIdAndActive(assetId, active);
 		ITAsset findByAssetId = iTAssetRepository.findByAssetAndActive(findByAssetIdAndActive, active);
+<<<<<<< HEAD
 		log.info("logging->" + findByAssetId);
+=======
+		log.info("logging->"+findByAssetId);
+>>>>>>> f6f467bffe96089cff76a6636b098297faa97f90
 		if (findByAssetId != null) {
 //			employeeRepository.delete(findByEmployeeId);
 			findByAssetId.setActive(!active);
@@ -120,6 +145,7 @@ public class ITAssetServiceImp implements ITAssetService {
 		}
 	}
 
+<<<<<<< HEAD
 	@Override
 	public double totalITAssetCost() {
 
@@ -137,4 +163,6 @@ public class ITAssetServiceImp implements ITAssetService {
 		return 0;
 	}
 
+=======
+>>>>>>> f6f467bffe96089cff76a6636b098297faa97f90
 }

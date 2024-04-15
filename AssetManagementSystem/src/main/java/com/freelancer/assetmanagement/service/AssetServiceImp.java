@@ -1,10 +1,15 @@
 package com.freelancer.assetmanagement.service;
 
 import java.util.ArrayList;
+<<<<<<< HEAD
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+=======
+import java.util.List;
+import java.util.Objects;
+>>>>>>> f6f467bffe96089cff76a6636b098297faa97f90
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.freelancer.assetmanagement.dto.AssetDto;
+<<<<<<< HEAD
 import com.freelancer.assetmanagement.dto.AssetWithFixedAssetDto;
 import com.freelancer.assetmanagement.dto.EmployeeData;
 import com.freelancer.assetmanagement.dto.FixedAssetDto;
@@ -24,6 +30,12 @@ import com.freelancer.assetmanagement.model.Organization;
 import com.freelancer.assetmanagement.repository.AssetRepository;
 import com.freelancer.assetmanagement.repository.EmployeeRepository;
 import com.freelancer.assetmanagement.repository.FixedAssetRepository;
+=======
+import com.freelancer.assetmanagement.model.Asset;
+import com.freelancer.assetmanagement.model.Employee;
+import com.freelancer.assetmanagement.repository.AssetRepository;
+import com.freelancer.assetmanagement.repository.EmployeeRepository;
+>>>>>>> f6f467bffe96089cff76a6636b098297faa97f90
 
 @Service
 @Transactional
@@ -35,10 +47,14 @@ public class AssetServiceImp implements AssetService {
 
 	@Autowired
 	private AssetRepository assetRepository;
+<<<<<<< HEAD
 
 	@Autowired
 	private FixedAssetRepository fixedAssetRepository;
 
+=======
+	
+>>>>>>> f6f467bffe96089cff76a6636b098297faa97f90
 	@Autowired
 	private EmployeeRepository employeeRepository;
 
@@ -47,6 +63,7 @@ public class AssetServiceImp implements AssetService {
 		Asset asset = new Asset();
 		assetDto.setActive(active);
 		BeanUtils.copyProperties(assetDto, asset);
+<<<<<<< HEAD
 		if(Objects.nonNull(assetDto.getEmployeeData())) {
 			asset.setEmployee(new Employee());
 			BeanUtils.copyProperties(assetDto.getEmployeeData(), asset.getEmployee());
@@ -55,6 +72,8 @@ public class AssetServiceImp implements AssetService {
 			asset.setOrganization(new Organization());
 			BeanUtils.copyProperties(assetDto.getOrganizationData(), asset.getOrganization());
 		}
+=======
+>>>>>>> f6f467bffe96089cff76a6636b098297faa97f90
 		Asset save = assetRepository.save(asset);
 		assetDto.setAssetId(asset.getAssetId());
 		assetDto.setCreatedAt(asset.getCreatedAt());
@@ -65,6 +84,7 @@ public class AssetServiceImp implements AssetService {
 	}
 
 	@Override
+<<<<<<< HEAD
 	public AssetWithFixedAssetDto saveAssetWithFixedAsset(AssetWithFixedAssetDto assetWithFixedAssetDto) {
 		Asset asset = new Asset();
 		AssetDto assetDto = assetWithFixedAssetDto.getAssetDto();
@@ -95,6 +115,8 @@ public class AssetServiceImp implements AssetService {
 	}
 
 	@Override
+=======
+>>>>>>> f6f467bffe96089cff76a6636b098297faa97f90
 	public AssetDto updateAsset(AssetDto assetDto) {
 		Asset findByAssetId = assetRepository.findByAssetIdAndActive(assetDto.getAssetId(), active);
 		if (findByAssetId != null) {
@@ -116,11 +138,15 @@ public class AssetServiceImp implements AssetService {
 
 	@Override
 	public List<AssetDto> fetchAllAssets() {
+<<<<<<< HEAD
 		log.info("Inside fetchAllAssets");
+=======
+>>>>>>> f6f467bffe96089cff76a6636b098297faa97f90
 		List<AssetDto> assetDtos = new ArrayList<AssetDto>();
 
 //		List<Employee> employees = assetRepository.findAll();
 		List<Asset> assets = assetRepository.findByActive(active);
+<<<<<<< HEAD
 		log.info("assets->" + assets);
 		for (Asset asset : assets) {
 			AssetDto assetDto = new AssetDto();
@@ -134,12 +160,19 @@ public class AssetServiceImp implements AssetService {
 			}
 			assetDtos.add(assetDto);
 			log.info("assetDtos->" + assetDtos);
+=======
+		for (Asset asset : assets) {
+			AssetDto assetDto = new AssetDto();
+			BeanUtils.copyProperties(asset, assetDto);
+			assetDtos.add(assetDto);
+>>>>>>> f6f467bffe96089cff76a6636b098297faa97f90
 
 		}
 		return assetDtos;
 	}
 
 	@Override
+<<<<<<< HEAD
 	public AssetDto findAssetByAssetId(Long assetId) {
 		log.info("Inside findAssetByAssetId method AssetServiceImp");
 		AssetDto assetDto = new AssetDto();
@@ -154,11 +187,21 @@ public class AssetServiceImp implements AssetService {
 		log.info("assetDto->" + assetDto);
 		BeanUtils.copyProperties(asset.getEmployee(), assetDto.getEmployeeData());
 		log.info("assetDto->" + assetDto);
+=======
+	public AssetDto findAssetByAssetId(long assetId) {
+		AssetDto assetDto = new AssetDto();
+		Asset asset = assetRepository.findByAssetIdAndActive(assetId, active);
+		BeanUtils.copyProperties(asset, assetDto);
+>>>>>>> f6f467bffe96089cff76a6636b098297faa97f90
 		return assetDto;
 	}
 
 	@Override
+<<<<<<< HEAD
 	public String deleteAssetByAssetId(Long assetId) {
+=======
+	public String deleteAssetByAssetId(long assetId) {
+>>>>>>> f6f467bffe96089cff76a6636b098297faa97f90
 		Asset findByAssetId = assetRepository.findByAssetIdAndActive(assetId, active);
 		if (findByAssetId != null) {
 //			employeeRepository.delete(findByEmployeeId);
@@ -174,6 +217,7 @@ public class AssetServiceImp implements AssetService {
 	@Override
 	public String deleteAssetByEmployeeId(String employeeId) {
 		Employee findByEmployeeIdAndActive = employeeRepository.findByEmployeeIdAndActive(employeeId, active);
+<<<<<<< HEAD
 		Optional<List<Asset>> findByEmployeeId = assetRepository.findByEmployeeAndActive(findByEmployeeIdAndActive,
 				active);
 		if (findByEmployeeId.isPresent()) {
@@ -182,6 +226,13 @@ public class AssetServiceImp implements AssetService {
 				asset.setActive(!active);
 				assetRepository.save(asset);
 			}
+=======
+		Asset findByEmployeeId = assetRepository.findByEmployeeAndActive(findByEmployeeIdAndActive, active);
+		if (findByEmployeeId != null) {
+//			employeeRepository.delete(findByEmployeeId);
+			findByEmployeeId.setActive(!active);
+			assetRepository.save(findByEmployeeId);
+>>>>>>> f6f467bffe96089cff76a6636b098297faa97f90
 			return "deleted Successfully";
 		} else {
 			log.info("Asset not found so delete is not possible");
@@ -202,13 +253,18 @@ public class AssetServiceImp implements AssetService {
 			log.info("Total Asset fetched");
 			return assets;
 		}
+<<<<<<< HEAD
 
+=======
+		
+>>>>>>> f6f467bffe96089cff76a6636b098297faa97f90
 		else {
 			log.info("Total Asset not present");
 			return null;
 		}
 	}
 
+<<<<<<< HEAD
 	@Override
 	public List<AssetDto> findAssetByEmployeeId(String employeeId) {
 
@@ -234,4 +290,6 @@ public class AssetServiceImp implements AssetService {
 		}
 	}
 
+=======
+>>>>>>> f6f467bffe96089cff76a6636b098297faa97f90
 }
