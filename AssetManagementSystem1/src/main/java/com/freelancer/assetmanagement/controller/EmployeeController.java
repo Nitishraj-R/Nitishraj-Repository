@@ -198,8 +198,9 @@ public class EmployeeController {
 		if(authenticate.isAuthenticated()) {
 			
 			generatedToken.setToken(jwtService.generateToken(authRequest.getEmailId()));
+			generatedToken.setEmployeeDto(employeeService.findEmployeeByEmailId(authRequest.getEmailId()));
 //			generatedToken.setOrganizationId(authRequest.getOrganizationId()); //org is setted in employeeServiceImp class
-			log.info("orgnaization id in generated token->"+generatedToken.getOrganization());
+//			log.info("orgnaization id in generated token->"+generatedToken.getOrganizationDto());
 				response.setStatus(HttpStatus.OK.value());
 			response.setData(generatedToken);
 			response.setMessage("Token Generated Successfully");

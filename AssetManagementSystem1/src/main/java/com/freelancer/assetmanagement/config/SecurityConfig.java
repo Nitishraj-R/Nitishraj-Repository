@@ -60,7 +60,7 @@ public class SecurityConfig {
 				.requestMatchers("employee/authenticate","employee/postEmployee","organization/postOrganization","employee/deleteByEmployeeId","asset/saveAsset","swagger-ui","/v3/**","/v2/api-docs","/configuration/ui","/swagger-resources/**","/configuration/security","/swagger-ui.html","swagger-ui/**","/webjars/**","/v2/**").permitAll()
 				.and()
 				.authorizeHttpRequests()
-				.requestMatchers("employee/getEmployeeById","employee/getAllEmployees","employee/updateEmployee","employee/deleteEmployee","organization/getAllOrganizations","organization/getOrganizationById","organization/updateOrganization","organization/deleteOrganization","asset/**","fixedAsset/**","ITAsset/**").authenticated()
+				.requestMatchers("employee/getEmployeeById","asset/getAssetByEmployeeId","employee/getAllEmployees","employee/updateEmployee","employee/deleteEmployee","organization/getAllOrganizations","organization/getOrganizationById","organization/updateOrganization","organization/deleteOrganization","asset/**","fixedAsset/**","ITAsset/**").authenticated()
 				.and()
 				.sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS)

@@ -2,6 +2,7 @@ package com.freelancer.assetmanagement.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,24 +21,24 @@ import com.freelancer.assetmanagement.repository.ITAssetRepository;
 
 @Service
 @Transactional
-public class ITAssetServiceImp implements ITAssetService{
+public class ITAssetServiceImp implements ITAssetService {
 
-	private static final boolean active=true;
+	private static final boolean active = true;
 
-	Logger log=LoggerFactory.getLogger(ITAssetServiceImp.class);
+	Logger log = LoggerFactory.getLogger(ITAssetServiceImp.class);
 	@Autowired
 	private ITAssetRepository iTAssetRepository;
-	
+
 	@Autowired
 	private AssetRepository assetRepository;
-	
+
 	@Override
 	public ITAssetDto saveITAsset(ITAssetDto iTAssetDto) {
 		ITAsset iTAsset = new ITAsset();
 		iTAssetDto.setActive(active);
 		BeanUtils.copyProperties(iTAssetDto, iTAsset);
 		ITAsset save = iTAssetRepository.save(iTAsset);
-		
+
 		iTAssetDto.setId(save.getId());
 		iTAssetDto.setCreatedAt(save.getCreatedAt());
 		iTAssetDto.setCreatedBy(save.getCreatedBy());
@@ -107,7 +108,7 @@ public class ITAssetServiceImp implements ITAssetService{
 	public String deleteITAssetByAssetId(long assetId) {
 		Asset findByAssetIdAndActive = assetRepository.findByAssetIdAndActive(assetId, active);
 		ITAsset findByAssetId = iTAssetRepository.findByAssetAndActive(findByAssetIdAndActive, active);
-		log.info("logging->"+findByAssetId);
+		log.info("logging->" + findByAssetId);
 		if (findByAssetId != null) {
 //			employeeRepository.delete(findByEmployeeId);
 			findByAssetId.setActive(!active);
@@ -117,6 +118,23 @@ public class ITAssetServiceImp implements ITAssetService{
 			log.info("IT Asset not found so delete is not possible");
 			return "IT Asset not found to delete";
 		}
+	}
+
+	@Override
+	public double totalITAssetCost() {
+
+		double cost = 0;
+		log.info("Inside TotalITAssetcost method in ITAssetImp class");
+		List<ITAsset> findByActive = iTAssetRepository.findByActive(active);
+		if (Objects.nonNull(findByActive)) {
+			for (ITAsset iTAsset : findByActive) {
+				if (Objects.nonNull(iTAsset.getAsset())) {
+					cost += iTAsset.getAsset().getCost();
+				}
+			}
+			return cost;
+		}
+		return 0;
 	}
 
 }

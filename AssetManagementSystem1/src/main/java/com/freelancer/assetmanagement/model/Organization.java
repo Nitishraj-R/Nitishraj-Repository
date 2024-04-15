@@ -2,6 +2,7 @@ package com.freelancer.assetmanagement.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
@@ -36,6 +37,8 @@ public class Organization extends BaseModel{
 	private Boolean active;
 	
 	@OneToMany(mappedBy = "organization")
+	@JsonIgnore
+//	@JsonBackReference
 	private List<Asset> asset;
 	
 	@OneToMany(mappedBy = "organization")
@@ -47,6 +50,6 @@ public class Organization extends BaseModel{
 	public String toString() {
 		return "Organization [organizationId=" + organizationId + ", organizationCode=" + organizationCode + ", name="
 				+ name + ", emailId=" + emailId + ", location=" + location + ", contactNumber=" + contactNumber
-				+ ", active=" + active + ", asset=" + asset + ", employees=" + employees + "]";
+				+ ", active=" + active + ", employees=" + employees + "]";
 	}
 }

@@ -20,6 +20,7 @@ import com.freelancer.assetmanagement.config.UserInfoUserDetails;
 import com.freelancer.assetmanagement.controller.EmployeeController;
 import com.freelancer.assetmanagement.dto.EmployeeData;
 import com.freelancer.assetmanagement.dto.EmployeeDto;
+import com.freelancer.assetmanagement.dto.OrganizationDto;
 import com.freelancer.assetmanagement.model.AuthRequest;
 import com.freelancer.assetmanagement.model.Employee;
 import com.freelancer.assetmanagement.model.GeneratedToken;
@@ -30,12 +31,12 @@ import com.freelancer.assetmanagement.repository.OrganizationRepository;
 @Transactional
 public class EmployeeServiceImp implements EmployeeService, UserDetailsService {
 
-	public static final Boolean active=true;
+	public static final Boolean active = true;
 	Logger log = LoggerFactory.getLogger(EmployeeController.class);
 
 	@Autowired
 	private EmployeeRepository employeeRepository;
-	
+
 	@Autowired
 	private OrganizationRepository organizationRepository;
 
@@ -44,7 +45,7 @@ public class EmployeeServiceImp implements EmployeeService, UserDetailsService {
 
 	@Autowired
 	private AuthRequest authRequest;
-	
+
 	@Autowired
 	private GeneratedToken generatedToken;
 
@@ -54,34 +55,32 @@ public class EmployeeServiceImp implements EmployeeService, UserDetailsService {
 //		if(employee.getOrganization()!=null) {
 //			organizationRepository.save(employee.getOrganization());
 //		}
-		Employee employee=new Employee();
-		BeanUtils.copyProperties(employeeData,employee);
+		Employee employee = new Employee();
+		BeanUtils.copyProperties(employeeData, employee);
 		employee.setActive(active);
 
 		Employee savedEmployee = employeeRepository.save(employee);
-		if(Objects.nonNull(savedEmployee)) {
+		if (Objects.nonNull(savedEmployee)) {
 			employeeData.setId(savedEmployee.getId());
 			employeeData.setCreatedAt(savedEmployee.getCreatedAt());
 			employeeData.setCreatedBy(savedEmployee.getCreatedBy());
 			employeeData.setModifiedAt(savedEmployee.getModifiedAt());
 			employeeData.setModifiedBy(savedEmployee.getModifiedBy());
-		return employeeData;
-		}
-		else {
+			return employeeData;
+		} else {
 			return null;
 		}
 	}
 
 	@Override
 	public List<EmployeeDto> fetchAllEmployees() {
-		List<EmployeeDto> employeeDtos= new ArrayList<EmployeeDto>();
-		
+		List<EmployeeDto> employeeDtos = new ArrayList<EmployeeDto>();
 
 //		List<Employee> employees = employeeRepository.findAll();
-		List<Employee> employees=employeeRepository.findByActive(active);
-		for(Employee employee:employees) {
-			EmployeeDto employeeDto=new EmployeeDto();
-			BeanUtils.copyProperties(employee,employeeDto);
+		List<Employee> employees = employeeRepository.findByActive(active);
+		for (Employee employee : employees) {
+			EmployeeDto employeeDto = new EmployeeDto();
+			BeanUtils.copyProperties(employee, employeeDto);
 			employeeDtos.add(employeeDto);
 
 		}
@@ -90,23 +89,22 @@ public class EmployeeServiceImp implements EmployeeService, UserDetailsService {
 
 	@Override
 	public EmployeeDto findEmployeeById(String employeeId) {
-		EmployeeDto employeeDto=new EmployeeDto();
-		Employee employee = employeeRepository.findByEmployeeIdAndActive(employeeId,active);
-		BeanUtils.copyProperties(employee,employeeDto);
+		EmployeeDto employeeDto = new EmployeeDto();
+		Employee employee = employeeRepository.findByEmployeeIdAndActive(employeeId, active);
+		BeanUtils.copyProperties(employee, employeeDto);
 		return employeeDto;
 	}
 
 	@Override
 	public EmployeeData updateEmployeeByEmployeeId(EmployeeData employeeData) {
-		Employee findByEmployeeId = employeeRepository.findByEmployeeIdAndActive(employeeData.getEmployeeId(),active);
+		Employee findByEmployeeId = employeeRepository.findByEmployeeIdAndActive(employeeData.getEmployeeId(), active);
 		if (findByEmployeeId != null) {
 			employeeData.setPassword(encoder.encode(employeeData.getPassword()));
 			employeeData.setEmployeeId(findByEmployeeId.getEmployeeId());
 			employeeData.setCreatedAt(findByEmployeeId.getCreatedAt());
 			employeeData.setCreatedBy(findByEmployeeId.getCreatedBy());
-			BeanUtils.copyProperties(employeeData,findByEmployeeId);
-			
-			
+			BeanUtils.copyProperties(employeeData, findByEmployeeId);
+
 			Employee updatedEmployee = employeeRepository.save(findByEmployeeId);
 			employeeData.setCreatedAt(updatedEmployee.getCreatedAt());
 			employeeData.setCreatedBy(updatedEmployee.getCreatedBy());
@@ -121,7 +119,7 @@ public class EmployeeServiceImp implements EmployeeService, UserDetailsService {
 
 	@Override
 	public String deleteEmployeeByEmployeeId(String employeeId) {
-		Employee findByEmployeeId = employeeRepository.findByEmployeeIdAndActive(employeeId,active);
+		Employee findByEmployeeId = employeeRepository.findByEmployeeIdAndActive(employeeId, active);
 		if (findByEmployeeId != null) {
 //			employeeRepository.delete(findByEmployeeId);
 			findByEmployeeId.setActive(!active);
@@ -132,9 +130,9 @@ public class EmployeeServiceImp implements EmployeeService, UserDetailsService {
 			return "Employee not found to delete";
 		}
 	}
-	
-	public Integer deleteByEmployeeId(String employeeId){
-		Employee findByEmployeeId = employeeRepository.findByEmployeeIdAndActive(employeeId,active);
+
+	public Integer deleteByEmployeeId(String employeeId) {
+		Employee findByEmployeeId = employeeRepository.findByEmployeeIdAndActive(employeeId, active);
 
 		if (findByEmployeeId != null) {
 //			Optional<Integer> deleteByEmployeeId = employeeRepository.deleteByEmployeeIdAndActive(employeeId,active);
@@ -151,7 +149,19 @@ public class EmployeeServiceImp implements EmployeeService, UserDetailsService {
 			log.info("Employee not found so delete is not possible");
 			return Integer.valueOf(-1);
 		}
-		
+
+	}
+
+	public EmployeeDto findEmployeeByEmailId(String emailId) {
+		EmployeeDto employeeDto = new EmployeeDto();
+		Optional<Employee> findByEmailIdAndActive = employeeRepository.findByEmailIdAndActive(emailId, active);
+		if (findByEmailIdAndActive.isPresent()) {
+			BeanUtils.copyProperties(findByEmailIdAndActive.get(), employeeDto);
+			return employeeDto;
+		}
+		else {
+			return null;
+		}
 	}
 
 	@Override
@@ -159,13 +169,15 @@ public class EmployeeServiceImp implements EmployeeService, UserDetailsService {
 //		String firstName = username.split(" ")[0];
 //		String lastName = username.split(" ")[1];
 //		System.out.println("firstName=" + firstName + ", lastName=" + lastName);
-		Optional<Employee> userInfo = employeeRepository.findByEmailIdAndActive(emailId,active);
+		Optional<Employee> userInfo = employeeRepository.findByEmailIdAndActive(emailId, active);
 		System.out.println("Employee->" + userInfo.get());
 		if (userInfo.isPresent()) {
-			authRequest.setOrganization(userInfo.get().getOrganization());
-			generatedToken.setOrganization(authRequest.getOrganization());
-			log.info("orgnaization id in EmployeeServiceImp->"+authRequest.getOrganization());
-			
+			OrganizationDto dto=new OrganizationDto();
+			BeanUtils.copyProperties(userInfo.get().getOrganization(), dto);
+			authRequest.setOrganizationDto(dto);
+//			generatedToken.setOrganizationDto(authRequest.getOrganizationDto());
+			log.info("orgnaization id in EmployeeServiceImp->" + authRequest.getOrganizationDto());
+
 		}
 		return userInfo.map(UserInfoUserDetails::new)
 				.orElseThrow(() -> new UsernameNotFoundException("user not found " + emailId));

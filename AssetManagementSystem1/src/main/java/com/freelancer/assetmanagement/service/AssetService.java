@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.freelancer.assetmanagement.dto.AssetDto;
+import com.freelancer.assetmanagement.dto.AssetWithFixedAssetDto;
 
 @Service
 public interface AssetService {
@@ -15,11 +16,15 @@ public interface AssetService {
 
 	public List<AssetDto> fetchAllAssets();
 
-	public AssetDto findAssetByAssetId(long assetId);
+	public AssetDto findAssetByAssetId(Long assetId);
 
-	public String deleteAssetByAssetId(long assetId);
+	public String deleteAssetByAssetId(Long assetId);
 
 	public String deleteAssetByEmployeeId(String employeeId);
 
 	public List<AssetDto> fetchTotalAssets();
+
+	public List<AssetDto> findAssetByEmployeeId(String employeeId);
+
+	public AssetWithFixedAssetDto saveAssetWithFixedAsset(AssetWithFixedAssetDto assetWithFixedAssetDto);
 }

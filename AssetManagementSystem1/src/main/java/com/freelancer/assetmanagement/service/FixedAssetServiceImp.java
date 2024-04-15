@@ -2,6 +2,7 @@ package com.freelancer.assetmanagement.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -111,5 +112,21 @@ public class FixedAssetServiceImp implements FixedAssetService{
 			return "Fixed Asset not found to delete";
 		}
 	}
+
+	@Override
+	public double totalFixedAssetCost() {
+		double cost=0;
+		log.info("Inside Totalfixedcost method in FixedAssetImp class");
+		List<FixedAsset> findByActive = fixedAssetRepository.findByActive(active);
+		if(Objects.nonNull(findByActive)) {
+			for(FixedAsset fixedAsset:findByActive) {
+				cost+=fixedAsset.getAsset().getCost();
+			}
+			return cost;
+		}
+		return 0;
+	}
+	
+	
 	
 }

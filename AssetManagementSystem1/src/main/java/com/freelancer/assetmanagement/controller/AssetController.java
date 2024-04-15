@@ -21,13 +21,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.freelancer.assetmanagement.dto.AssetCount;
 import com.freelancer.assetmanagement.dto.AssetDto;
+import com.freelancer.assetmanagement.dto.AssetWithFixedAssetDto;
 import com.freelancer.assetmanagement.service.AssetService;
+import com.freelancer.assetmanagement.service.FixedAssetService;
+import com.freelancer.assetmanagement.service.ITAssetService;
 import com.freelancer.assetmanagement.util.ResponseStructure;
 
 
 @RestController
 @RequestMapping("/asset")
-@CrossOrigin(origins ="http://localhost:4200/",methods = {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.DELETE},allowedHeaders = {"Content-type","Authentication"},allowCredentials = "true")
+@CrossOrigin(origins ="http://localhost:4200/",methods = {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.DELETE},allowedHeaders = {"Content-type","Authorization"},allowCredentials = "true")
 
 //@Tag(
 //        name = "",
@@ -38,6 +41,12 @@ public class AssetController {
 	Logger log=LoggerFactory.getLogger(AssetController.class);
 	@Autowired
 	private AssetService assetService;
+	
+	@Autowired
+	private FixedAssetService fixedAssetService;
+	
+	@Autowired
+	private ITAssetService iTAssetService;
 	
 	@PostMapping("/saveAsset")
 	public ResponseEntity<ResponseStructure<AssetDto>> saveAsset(@RequestBody AssetDto assetDto) {
@@ -60,6 +69,31 @@ public class AssetController {
 			response.setMessage("Asset not saved");
 			response.setData(null);
 			ResponseEntity<ResponseStructure<AssetDto>> responseEntity=new ResponseEntity<>(response,HttpStatus.BAD_REQUEST);
+			return responseEntity;
+		}
+	}
+	
+	@PostMapping("/saveAssetWithFixed")
+	public ResponseEntity<ResponseStructure<AssetWithFixedAssetDto>> saveAssetAndFixedAsset(@RequestBody AssetWithFixedAssetDto assetWithFixedAssetDto) {
+		log.info("AssetWithFixedAssetDto->"+assetWithFixedAssetDto);
+		ResponseStructure<AssetWithFixedAssetDto> response = new ResponseStructure<>();
+
+		
+		AssetWithFixedAssetDto savedAsset = assetService.saveAssetWithFixedAsset(assetWithFixedAssetDto);
+
+		log.info("Logging-> "+savedAsset);
+		if (Objects.nonNull(savedAsset)) {
+			response.setStatus(HttpStatus.OK.value());
+			response.setMessage("Asset with FixedAsset saved successfully");
+			response.setData(savedAsset);
+			ResponseEntity<ResponseStructure<AssetWithFixedAssetDto>> responseEntity=new ResponseEntity<>(response,HttpStatus.OK);
+			return responseEntity;
+		}
+		else {
+			response.setStatus(HttpStatus.BAD_REQUEST.value());
+			response.setMessage("Asset with FixedAsset not saved");
+			response.setData(null);
+			ResponseEntity<ResponseStructure<AssetWithFixedAssetDto>> responseEntity=new ResponseEntity<>(response,HttpStatus.BAD_REQUEST);
 			return responseEntity;
 		}
 	}
@@ -114,7 +148,7 @@ public class AssetController {
 	}
 	
 	@GetMapping("/getAssetById")
-	public ResponseEntity<ResponseStructure<AssetDto>> getAssetById(@RequestParam long assetId) {
+	public ResponseEntity<ResponseStructure<AssetDto>> getAssetById(@RequestParam Long assetId) {
 		ResponseStructure<AssetDto> response = new ResponseStructure<>();
 		AssetDto fetchedAsset = assetService.findAssetByAssetId(assetId);
 
@@ -181,13 +215,45 @@ public class AssetController {
 	
 	@GetMapping("/getCount")
 	public AssetCount getCount() {
+		log.info("Inside getCount method in AssetController Class");
 		List<AssetDto> fetchedAssets = assetService.fetchAllAssets();
+		log.info("fetchedAssets->"+fetchedAssets);
 		List<AssetDto> fetchTotalAssets=assetService.fetchTotalAssets();
+		log.info("fetchTotalAssets->"+fetchTotalAssets);
 		AssetCount count=new AssetCount();
 		count.setActiveCount(fetchedAssets.size());
+		log.info("count.getActiveCount->"+count.getActiveCount());
 		count.setTotalCount(fetchTotalAssets.size());
+		log.info("count.getTotalCount()->"+count.getTotalCount());
 		count.setInactiveCount(fetchTotalAssets.size()-fetchedAssets.size());
+		log.info("count.getInactiveCount()->"+count.getInactiveCount());
+		count.setFixedAssetCost(fixedAssetService.totalFixedAssetCost());
+		log.info("count.getFixedAssetCost()->"+count.getFixedAssetCost());
+		count.setITAssetCost(iTAssetService.totalITAssetCost());
+		log.info("count.getITAssetCost()->"+count.getITAssetCost());
 		return count;
+	}
+	
+	@GetMapping("/getAssetByEmployeeId")
+	public ResponseEntity<ResponseStructure<List<AssetDto>>> getAssetByEmployeeId(@RequestParam String employeeId) {
+		ResponseStructure<List<AssetDto>> response = new ResponseStructure<>();
+		List<AssetDto> fetchedAsset = assetService.findAssetByEmployeeId(employeeId);
+
+		log.info("Logging fetchedAsset-> "+fetchedAsset);
+		if (Objects.nonNull(fetchedAsset)) {
+			response.setStatus(HttpStatus.OK.value());
+			response.setMessage("Asset fetched successfully");
+			response.setData(fetchedAsset);
+			ResponseEntity<ResponseStructure<List<AssetDto>>> responseEntity=new ResponseEntity<>(response,HttpStatus.OK);
+			return responseEntity;
+		}
+		else {
+			response.setStatus(HttpStatus.NOT_FOUND.value());
+			response.setMessage("Asset not fetched");
+			response.setData(null);
+			ResponseEntity<ResponseStructure<List<AssetDto>>> responseEntity=new ResponseEntity<>(response,HttpStatus.NOT_FOUND);
+			return responseEntity;
+		}
 	}
 
 }

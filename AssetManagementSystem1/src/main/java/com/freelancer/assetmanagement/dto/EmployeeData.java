@@ -17,6 +17,7 @@ public class EmployeeData extends BaseModel {
 	 */
 	private static final long serialVersionUID = 1187140875575028964L;
 	private long id;
+	private String employeeImage;
 	private String employeeId;
 	private String firstName;
 	private String lastName;
@@ -28,20 +29,22 @@ public class EmployeeData extends BaseModel {
 	private String designation;
 	private Boolean active;
 	
-public Boolean getActive() {
+
+
+	//	@Enumerated(EnumType.STRING)
+	private List<String> role;
+	
+	private OrganizationData organizationData;
+	
+//	private List<Asset> assets;
+	
+	public Boolean getActive() {
 		return active;
 	}
 
 	public void setActive(Boolean active) {
 		this.active = active;
 	}
-
-	//	@Enumerated(EnumType.STRING)
-	private List<String> role;
-	
-	private Organization organization;
-	
-//	private List<Asset> assets;
 
 	public long getId() {
 		return id;
@@ -132,12 +135,12 @@ public Boolean getActive() {
 	}
 
 	
-	public Organization getOrganization() {
-		return organization;
+	public OrganizationData getOrganizationData() {
+		return organizationData;
 	}
 
-	public void setOrganization(Organization organization) {
-		this.organization = organization;
+	public void setOrganizationData(OrganizationData organizationData) {
+		this.organizationData = organizationData;
 	}
 	
 

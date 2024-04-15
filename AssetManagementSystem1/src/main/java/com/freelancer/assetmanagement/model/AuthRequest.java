@@ -2,22 +2,25 @@ package com.freelancer.assetmanagement.model;
 
 import org.springframework.stereotype.Component;
 
+import com.freelancer.assetmanagement.dto.OrganizationData;
+import com.freelancer.assetmanagement.dto.OrganizationDto;
+
 @Component
 public class AuthRequest {
 
 	private String emailId;
 	private String password;
-	private Organization organization;
+	private OrganizationDto organizationDto;
 	
 	
 	public AuthRequest() {
 		super();
 	}
-	public AuthRequest(String emailId, String password, Organization organization) {
+	public AuthRequest(String emailId, String password, OrganizationDto organizationDto) {
 		super();
 		this.emailId = emailId;
 		this.password = password;
-		this.organization = organization;
+		this.organizationDto = organizationDto;
 	}
 
 	
@@ -36,19 +39,19 @@ public class AuthRequest {
 	}
 
 
-	public Organization getOrganization() {
-		return organization;
+	public OrganizationDto getOrganizationDto() {
+		return organizationDto;
 	}
 
 
-	public void setOrganization(Organization organization) {
-		this.organization = organization;
+	public void setOrganizationDto(OrganizationDto organizationDto) {
+		this.organizationDto = organizationDto;
 	}
 
 
 	@Override
 	public String toString() {
-		return "AuthRequest [emailId=" + emailId + ", password=" + password + ", organization=" + organization
+		return "AuthRequest [emailId=" + emailId + ", password=" + password + ", organizationDto=" + organizationDto
 				+ "]";
 	}
 

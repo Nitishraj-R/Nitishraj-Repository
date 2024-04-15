@@ -27,7 +27,7 @@ import com.freelancer.assetmanagement.util.ResponseStructure;
 
 @RestController
 @RequestMapping("/organization")
-@CrossOrigin(origins ="http://localhost:4200/",methods = {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.DELETE},allowedHeaders = {"Content-type","Authentication"},allowCredentials = "true")
+@CrossOrigin(origins ="http://localhost:4200/",methods = {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.DELETE},allowedHeaders = {"Content-type","Authorization"},allowCredentials = "true")
 
 public class OrganizationController {
 

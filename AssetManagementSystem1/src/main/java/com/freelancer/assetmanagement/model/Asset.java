@@ -1,14 +1,15 @@
 package com.freelancer.assetmanagement.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.freelancer.assetmanagement.enumarated.AssetType;
 import com.freelancer.assetmanagement.enumarated.Category;
-import com.freelancer.assetmanagement.enumarated.OS;
 import com.freelancer.assetmanagement.enumarated.OperationalStatus;
 import com.freelancer.assetmanagement.enumarated.Status;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -29,6 +30,7 @@ public class Asset extends BaseModel{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long assetId;
 	private String assetCode;
+	private String assetImage;
 	private String assetName;
 	private String usedBy;
 	private String baseLocation;
@@ -38,7 +40,7 @@ public class Asset extends BaseModel{
 	@Enumerated(EnumType.STRING)
 	private Status status;
 	@Enumerated(EnumType.STRING)
-	private OperationalStatus OperationalStatus;
+	private OperationalStatus operationalStatus;
 	@Enumerated(EnumType.STRING)
 	private AssetType assetType;
 	@Enumerated(EnumType.STRING)
@@ -53,12 +55,14 @@ public class Asset extends BaseModel{
 //	@OneToOne
 //	private AssetCategory assetCategoryId;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn
+//	@JsonManagedReference
 	private Employee employee;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn
+//	@JsonManagedReference
 	private Organization organization;
 	
 	public static long getSerialversionuid() {

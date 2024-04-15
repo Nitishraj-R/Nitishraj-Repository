@@ -1,10 +1,12 @@
 package com.freelancer.assetmanagement.service;
 
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.stereotype.Service;
 
 import com.freelancer.assetmanagement.dto.ITAssetDto;
+import com.freelancer.assetmanagement.model.FixedAsset;
 
 @Service
 public interface ITAssetService {
@@ -20,5 +22,7 @@ public interface ITAssetService {
 	public String deleteITAssetById(long id);
 
 	public String deleteITAssetByAssetId(long assetId);
+	
+	public double totalITAssetCost();
 
 }
