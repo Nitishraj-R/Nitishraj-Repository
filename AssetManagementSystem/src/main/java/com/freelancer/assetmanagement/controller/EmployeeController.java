@@ -35,7 +35,11 @@ import com.freelancer.assetmanagement.util.ResponseStructure;
 
 @RestController
 @RequestMapping("/employee")
+<<<<<<< HEAD
 @CrossOrigin(originPatterns ="*",methods = {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.DELETE},allowedHeaders = {"Content-type","Authorization"})
+=======
+@CrossOrigin(originPatterns ="*",methods = {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.DELETE},allowedHeaders = {"Content-type", "Authorization"}, allowCredentials = "true")
+>>>>>>> f6f467bffe96089cff76a6636b098297faa97f90
 
 //@Tag(
 //        name = "",
@@ -200,7 +204,11 @@ public class EmployeeController {
 			generatedToken.setToken(jwtService.generateToken(authRequest.getEmailId()));
 			generatedToken.setEmployeeDto(employeeService.findEmployeeByEmailId(authRequest.getEmailId()));
 //			generatedToken.setOrganizationId(authRequest.getOrganizationId()); //org is setted in employeeServiceImp class
+<<<<<<< HEAD
 //			log.info("orgnaization id in generated token->"+generatedToken.getOrganizationDto());
+=======
+			log.info("orgnaization id in generated token->"+generatedToken.getOrganization());
+>>>>>>> f6f467bffe96089cff76a6636b098297faa97f90
 				response.setStatus(HttpStatus.OK.value());
 			response.setData(generatedToken);
 			response.setMessage("Token Generated Successfully");

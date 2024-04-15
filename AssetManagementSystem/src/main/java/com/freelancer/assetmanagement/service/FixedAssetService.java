@@ -20,8 +20,11 @@ public interface FixedAssetService {
 	public String deleteFixedAssetById(long id);
 
 	public String deleteFixedAssetByAssetId(long assetId);
+<<<<<<< HEAD
 	
 	public double totalFixedAssetCost();
+=======
+>>>>>>> f6f467bffe96089cff76a6636b098297faa97f90
 
 	
 }
