@@ -1,6 +1,6 @@
 package com.freelancer.assetmanagement.enumarated;
 
-public enum AssetType {
+public enum Status {
 
-	Permanent,Lease;
+	ASSIGNED,NOT_ASSIGNED;
 }

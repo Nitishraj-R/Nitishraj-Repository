@@ -1,6 +1,6 @@
 package com.freelancer.assetmanagement.enumarated;
 
-public enum OS {
+public enum OperationalStatus {
 
-	Linus,Mac,Windows,Android,Apple_IOS
+	WORKING,NOT_WORKING;
 }
