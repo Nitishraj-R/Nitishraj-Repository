@@ -23,10 +23,7 @@ public class AssetDto extends BaseModel{
 	private static final long serialVersionUID = -9090913997526712273L;
 	private long assetId;
 	private String assetCode;
-<<<<<<< HEAD
 	private String assetImage;
-=======
->>>>>>> f6f467bffe96089cff76a6636b098297faa97f90
 	private String assetName;
 	private String usedBy;
 	private String baseLocation;
@@ -36,11 +33,8 @@ public class AssetDto extends BaseModel{
 	@Enumerated(EnumType.STRING)
 	private Status status;
 	@Enumerated(EnumType.STRING)
-<<<<<<< HEAD
 	private OperationalStatus operationalStatus;
-=======
-	private OperationalStatus OperationalStatus;
->>>>>>> f6f467bffe96089cff76a6636b098297faa97f90
+
 	@Enumerated(EnumType.STRING)
 	private AssetType assetType;
 	@Enumerated(EnumType.STRING)
@@ -55,7 +49,6 @@ public class AssetDto extends BaseModel{
 //	@OneToOne
 //	private AssetCategory assetCategoryId;
 	
-<<<<<<< HEAD
 //	@ManyToOne
 //	@JoinColumn
 	private EmployeeData employeeData;
@@ -63,15 +56,7 @@ public class AssetDto extends BaseModel{
 //	@ManyToOne
 //	@JoinColumn
 	private OrganizationData organizationData;
-=======
-	@ManyToOne
-	@JoinColumn
-	private Employee employee;
-	
-	@ManyToOne
-	@JoinColumn
-	private Organization organization;
->>>>>>> f6f467bffe96089cff76a6636b098297faa97f90
+
 	
 	
 }

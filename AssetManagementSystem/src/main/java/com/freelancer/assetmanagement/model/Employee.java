@@ -3,12 +3,8 @@ package com.freelancer.assetmanagement.model;
 import java.util.Date;
 import java.util.List;
 
-<<<<<<< HEAD
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-=======
-import com.fasterxml.jackson.annotation.JsonManagedReference;
->>>>>>> f6f467bffe96089cff76a6636b098297faa97f90
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -37,10 +33,7 @@ public class Employee extends BaseModel{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
-<<<<<<< HEAD
 	private String employeeImage;
-=======
->>>>>>> f6f467bffe96089cff76a6636b098297faa97f90
 	private String employeeId;
 	private String firstName;
 	private String lastName;
@@ -62,11 +55,8 @@ public class Employee extends BaseModel{
 	private Organization organization;
 	
 	@OneToMany(mappedBy = "employee")
-<<<<<<< HEAD
 //	@JsonBackReference
 	@JsonIgnore
-=======
->>>>>>> f6f467bffe96089cff76a6636b098297faa97f90
 	private List<Asset> assets;
 
 	public long getId() {
@@ -189,7 +179,6 @@ public class Employee extends BaseModel{
 		this.assets = assets;
 	}
 
-<<<<<<< HEAD
 	
 
 	public String getEmployeeImage() {
@@ -200,21 +189,12 @@ public class Employee extends BaseModel{
 		this.employeeImage = employeeImage;
 	}
 	
-=======
->>>>>>> f6f467bffe96089cff76a6636b098297faa97f90
 	@Override
 	public String toString() {
 		return "Employee [id=" + id + ", employeeId=" + employeeId + ", firstName=" + firstName + ", lastName="
 				+ lastName + ", emailId=" + emailId + ", password=" + password + ", dateOfJoining=" + dateOfJoining
 				+ ", dateOfBirth=" + dateOfBirth + ", mobileNumber=" + mobileNumber + ", designation=" + designation
-<<<<<<< HEAD
 				+ ", active=" + active + ", role=" + role +  "]";
 	}
 	
-=======
-				+ ", active=" + active + ", role=" + role + ", assets=" + assets + "]";
-	}
-	
-	
->>>>>>> f6f467bffe96089cff76a6636b098297faa97f90
 }

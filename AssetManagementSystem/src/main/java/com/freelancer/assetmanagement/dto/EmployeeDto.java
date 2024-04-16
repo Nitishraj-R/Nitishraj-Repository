@@ -14,10 +14,7 @@ public class EmployeeDto extends BaseModel{
 	 */
 	private static final long serialVersionUID = -6132366455560143606L;
 	private long id;
-<<<<<<< HEAD
 	private String employeeImage;
-=======
->>>>>>> f6f467bffe96089cff76a6636b098297faa97f90
 	private String employeeId;
 	private String firstName;
 	private String lastName;
@@ -119,7 +116,6 @@ public class EmployeeDto extends BaseModel{
 		return role;
 	}
 
-<<<<<<< HEAD
 	
 	public void setRole(List<String> role) {
 		this.role = role;
@@ -131,11 +127,6 @@ public class EmployeeDto extends BaseModel{
 	public void setEmployeeImage(String employeeImage) {
 		this.employeeImage = employeeImage;
 	}
-=======
-	public void setRole(List<String> role) {
-		this.role = role;
-	}
->>>>>>> f6f467bffe96089cff76a6636b098297faa97f90
 
 	
 	public Organization getOrganization() {

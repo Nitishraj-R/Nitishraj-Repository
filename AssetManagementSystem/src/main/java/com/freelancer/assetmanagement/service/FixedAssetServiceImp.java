@@ -2,10 +2,7 @@ package com.freelancer.assetmanagement.service;
 
 import java.util.ArrayList;
 import java.util.List;
-<<<<<<< HEAD
 import java.util.Objects;
-=======
->>>>>>> f6f467bffe96089cff76a6636b098297faa97f90
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -115,7 +112,6 @@ public class FixedAssetServiceImp implements FixedAssetService{
 			return "Fixed Asset not found to delete";
 		}
 	}
-<<<<<<< HEAD
 
 	@Override
 	public double totalFixedAssetCost() {
@@ -132,7 +128,5 @@ public class FixedAssetServiceImp implements FixedAssetService{
 	}
 	
 	
-=======
->>>>>>> f6f467bffe96089cff76a6636b098297faa97f90
 	
 }
